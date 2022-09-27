@@ -13,4 +13,4 @@ spec:
   owner: demo-team
   system: demo-app # Or specify system name of your choice
   definition:
-    $text: https://alexviei-calc-api.azurewebsites.net/swagger/v1/swagger.json
+    $text: https://github.com/vieiraae/servicecatalog/blob/main/calc-api/swagger.json
