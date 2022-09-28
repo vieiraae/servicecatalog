@@ -8,7 +8,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    
+    - name: show az version
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az version
+          
     - name: Login via Az module
       uses: azure/actions/login@v1
       with:
