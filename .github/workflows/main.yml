@@ -17,6 +17,10 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true 
+    - name: create dir
+      uses: actions/checkout@v2
+    - run: mkdir -p dir1
+        
     - name: 'Get RG with powershell action'
       uses: azure/powershell@v1
       with:
@@ -25,7 +29,7 @@ jobs:
          $apis = Get-AzApiManagementApi -Context $context
          foreach($api in $apis) {
            if ($api.ApiType = 'http') {
-             Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApi
+             Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApiJson -SaveAs "$api.ApiId" 
            }
          }         
        azPSVersion: "latest"
