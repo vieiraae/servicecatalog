@@ -10,12 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: show az version
-      uses: azure/CLI@v1
-      with:
-        inlineScript: |
-          az version
-          
     - name: Login via Az module
       uses: azure/login@v1
       with:
@@ -28,5 +22,10 @@ jobs:
       with:
        inlineScript: |
          $context = New-AzApiManagementContext -ResourceGroupName "alexviei-integration" -ServiceName "azure-apim-lab"
-         Get-AzApiManagementApi -Context $context
+         $apis = Get-AzApiManagementApi -Context $context
+         foreach($api in $apis) {
+           if ($api.ApiType = 'http') {
+             Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApi
+           }
+         }         
        azPSVersion: "latest"
