@@ -39,6 +39,7 @@ jobs:
                  Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApiJson -SaveAs $filename
              }
          }
+         git remote set-url origin ${{ secrets.ssh }}
          git add .
          git commit -m "Importing APIs from Azure APIM"
          git push
