@@ -18,6 +18,7 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true 
     - run: mkdir -p dir1
+    - run: echo "hello" > dir1/hello.txt
     - uses: actions/upload-artifact@v3
       with:
         name: my-artifact
