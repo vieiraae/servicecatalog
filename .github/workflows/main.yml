@@ -17,12 +17,6 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true 
-    - run: mkdir -p dir1
-    - run: echo "hello" > dir1/hello.txt
-    - uses: actions/upload-artifact@v3
-      with:
-        name: my-artifact
-        path: dir1 
     
     - name: 'Get RG with powershell action'
       uses: azure/powershell@v1
@@ -30,9 +24,19 @@ jobs:
        inlineScript: |
          $context = New-AzApiManagementContext -ResourceGroupName "alexviei-integration" -ServiceName "azure-apim-lab"
          $apis = Get-AzApiManagementApi -Context $context
-         foreach($api in $apis) {
-           if ($api.ApiType = 'http') {
-             Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApiJson -SaveAs "$api.ApiId" 
-           }
-         }         
+         foreach($api in $apis){
+             if ($api.ApiType = 'http') {
+                 if (Test-Path -Path $api.ApiId) {
+                     $dir = Get-Item $api.ApiId
+                 } else {
+                     $dir = New-Item $api.ApiId -Type Directory
+                 }
+                 $filename = "$($dir.FullName)/openapi.json"
+                 if (Test-Path $fileName) {
+                    Remove-Item $fileName
+                 }
+                 Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApiJson -SaveAs $filename
+             }
+         }
+         git status
        azPSVersion: "latest"
