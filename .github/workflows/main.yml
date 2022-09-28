@@ -1,0 +1,25 @@
+# This is a basic workflow to help you get started with Actions
+
+name: ExportAllAPIsFromAPIM
+
+# Controls when the workflow will run
+on: [push]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Login via Az module
+      uses: azure/login@v1
+      with:
+        creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
+        enable-AzPSSession: true 
+        
+    - name: Run Azure PowerShell script
+      uses: azure/powershell@v1
+      with:
+        inlineScript: |
+          Get-AzAccount
+        azPSVersion: "latest"
