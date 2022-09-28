@@ -19,7 +19,7 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true 
     
-    - name: 'Get RG with powershell action'
+    - name: 'Export Azure API Management APIs'
       uses: azure/powershell@v1
       with:
        inlineScript: |
@@ -42,5 +42,5 @@ jobs:
          git remote set-url origin ${{ secrets.ssh }}
          git add .
          git commit -m "Importing APIs from Azure APIM"
-         git push
+         git push origin HEAD:master
        azPSVersion: "latest"
