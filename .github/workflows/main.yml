@@ -17,10 +17,12 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true 
-    - name: create dir
-      uses: actions/checkout@v2
     - run: mkdir -p dir1
-        
+    - uses: actions/upload-artifact@v3
+      with:
+        name: my-artifact
+        path: dir1 
+    
     - name: 'Get RG with powershell action'
       uses: azure/powershell@v1
       with:
