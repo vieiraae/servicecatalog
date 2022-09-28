@@ -39,5 +39,7 @@ jobs:
                  Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApiJson -SaveAs $filename
              }
          }
-         git status
+         git add .
+         git commit -m "Importing APIs from Azure APIM"
+         git push
        azPSVersion: "latest"
