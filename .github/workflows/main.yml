@@ -11,7 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
     - name: Login via Az module
       uses: azure/login@v1
       with:
@@ -19,11 +18,11 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true 
-    - run: ls    
+    - name: Checkout files
+      uses: actions/checkout@v1
     - name: 'Export Azure API Management APIs'
       uses: azure/powershell@v1
       with:
-       repo-token: ${{ secrets.GITHUB_TOKEN }}
        inlineScript: |
          $context = New-AzApiManagementContext -ResourceGroupName "alexviei-integration" -ServiceName "azure-apim-lab"
          $apis = Get-AzApiManagementApi -Context $context
@@ -41,12 +40,12 @@ jobs:
                  Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApiJson -SaveAs $filename
              }
          }
-         dir
-         ls
-         git config user.email "github-actions[bot]@users.noreply.github.com"
-         git config user.name "github-actions[bot]"
-         git add .
-         git commit -m "Importing APIs from Azure APIM"
-         git push origin HEAD:main
        azPSVersion: "latest"
-    - run: ls
+    - name: Commit and push
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        git add .
+        git commit -m "Importing APIs from Azure APIM"
+        git push        
+
