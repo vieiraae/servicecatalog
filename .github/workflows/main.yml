@@ -19,7 +19,7 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true 
     - name: Checkout files
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: 'Export Azure API Management APIs'
       uses: azure/powershell@v1
       with:
@@ -43,9 +43,8 @@ jobs:
        azPSVersion: "latest"
     - name: Commit and push
       run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
+        git config user.name github-actions
+        git config user.email github-actions@github.com
         git add -A
         git commit -m "Importing APIs from Azure APIM"
         git push
