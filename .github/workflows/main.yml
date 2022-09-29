@@ -41,6 +41,8 @@ jobs:
                  Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApiJson -SaveAs $filename
              }
          }
+         git config --local user.email "github-actions[bot]@users.noreply.github.com"
+         git config --local user.name "github-actions[bot]"
          git add .
          git commit -m "Importing APIs from Azure APIM"
          git push origin HEAD:master
