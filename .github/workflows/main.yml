@@ -46,5 +46,5 @@ jobs:
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add -A
-        git diff-index --quiet HEAD || git commit -m "Importing APIs from Azure APIM"
+        git diff-index --quiet HEAD || git commit -m "APIs from Azure APIM (auto-imported)"
         git push
