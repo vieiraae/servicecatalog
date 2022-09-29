@@ -4,7 +4,8 @@ on: [push]
 name: ExportAllAPIsFromAPIM
 permissions:
       id-token: write
-      contents: read
+      contents: write
+      pull-requests: write
 jobs:
 
   build:
@@ -22,6 +23,7 @@ jobs:
     - name: 'Export Azure API Management APIs'
       uses: azure/powershell@v1
       with:
+       repo-token: ${{ secrets.GITHUB_TOKEN }}
        inlineScript: |
          $context = New-AzApiManagementContext -ResourceGroupName "alexviei-integration" -ServiceName "azure-apim-lab"
          $apis = Get-AzApiManagementApi -Context $context
@@ -39,7 +41,6 @@ jobs:
                  Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApiJson -SaveAs $filename
              }
          }
-         git remote set-url origin ${{ secrets.ssh }}
          git add .
          git commit -m "Importing APIs from Azure APIM"
          git push origin HEAD:master
