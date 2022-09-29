@@ -19,7 +19,7 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true 
-    
+    - run: ls    
     - name: 'Export Azure API Management APIs'
       uses: azure/powershell@v1
       with:
@@ -41,9 +41,12 @@ jobs:
                  Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApiJson -SaveAs $filename
              }
          }
-         git config --local user.email "github-actions[bot]@users.noreply.github.com"
-         git config --local user.name "github-actions[bot]"
+         dir
+         ls
+         git config user.email "github-actions[bot]@users.noreply.github.com"
+         git config user.name "github-actions[bot]"
          git add .
          git commit -m "Importing APIs from Azure APIM"
-         git push origin HEAD:master
+         git push origin HEAD:main
        azPSVersion: "latest"
+    - run: ls
