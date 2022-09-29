@@ -45,6 +45,7 @@ jobs:
       run: |
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "github-actions[bot]"
+        git config remote.origin.url 'https://${{ secrets.GITHUB_TOKEN }}@github.com/vieiraae/servicecatalog.git'
         git add .
         git commit -m "Importing APIs from Azure APIM"
         git push origin HEAD:mmain
