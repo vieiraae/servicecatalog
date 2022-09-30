@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: calc-api
-  description: 'This is a awsome calculator API.......'
+  description: This is a awsome calculator API.......
   links:
     - url: https://alexviei-calc-api.azurewebsites.net/
       title: API Definition
