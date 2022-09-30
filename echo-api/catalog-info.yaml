@@ -2,9 +2,9 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: calc-api
-  description: Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models.PsApiManagementApi.Description
+  description: 
   links:
-    - url: Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models.PsApiManagementApi.ServiceUrl
+    - url: http://echoapi.cloudapp.net/api
       title: API Definition
       icon: docs
 spec:

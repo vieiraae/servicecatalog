@@ -2,9 +2,9 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: calc-api
-  description: Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models.PsApiManagementApi.Description
+  description: This is a awsome calculator API
   links:
-    - url: Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models.PsApiManagementApi.ServiceUrl
+    - url: https://alexviei-calc-api.azurewebsites.net/
       title: API Definition
       icon: docs
 spec:
