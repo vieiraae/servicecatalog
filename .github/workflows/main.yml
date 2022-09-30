@@ -37,6 +37,7 @@ jobs:
                  if (Test-Path $fileName) {
                     Remove-Item $fileName
                  }
+                 Set-Content -Path "$($dir.FullName)/catalog-info.yaml" -Value "apiVersion: backstage.io/v1alpha1`nkind: API`nmetadata:`n  name: calc-api`n  description: $api.Description`n  links:`n    - url: $api.ServiceUrl`n      title: API Definition`n      icon: docs`nspec:`n  type: openapi`n  lifecycle: experimental`n  owner: demo-team`n  system: demo-app`n  definition:`n    `$text: https://github.com/vieiraae/servicecatalog/blob/main/$($api.ApiId)/openapi.json"                 
                  Export-AzApiManagementApi -Context $context -ApiId $api.ApiId -SpecificationFormat OpenApiJson -SaveAs $filename
              }
          }
