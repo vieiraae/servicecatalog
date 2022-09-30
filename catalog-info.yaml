@@ -5,5 +5,6 @@ metadata:
   annotations:
     github.com/project-slug: vieiraae/servicecatalog
 spec:
+  owner: demo-team
   type: other
   lifecycle: unknown
