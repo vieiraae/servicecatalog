@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Calculator API",
-    "description": "This is a awsome calculator API",
+    "title": "Calculator API aa",
+    "description": "This is a awsome calculator API...",
     "version": "1.0"
   },
   "servers": [
