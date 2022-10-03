@@ -12,5 +12,6 @@ spec:
   lifecycle: experimental
   owner: demo-team
   system: demo-app
+  consumesApi: calc-api
   definition:
     $text: https://github.com/vieiraae/servicecatalog/blob/main/echo-api/openapi.json
