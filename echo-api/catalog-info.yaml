@@ -1,8 +1,8 @@
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: calc-api
-  description: 
+  name: echo-api
+  description: echo api
   links:
     - url: http://echoapi.cloudapp.net/api
       title: API Definition
